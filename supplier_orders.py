@@ -25,10 +25,7 @@ def notifyWarehouse(supplier):
 
 
 def cleanup(conn):
-    try:
-        conn.execute("DELETE FROM orders WHERE received = 1")
-    except Exception:
-        pass
+    conn.execute("DELETE FROM orders WHERE received = 1")
 
 
 def pendingCount(conn):
