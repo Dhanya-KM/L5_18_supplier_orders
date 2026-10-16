@@ -1,18 +1,25 @@
 
-import sqlite3
 
+import sqlite3
 conn = sqlite3.connect(":memory:")
-conn.execute("CREATE TABLE orders (id INTEGER PRIMARY KEY, supplier TEXT, item TEXT, quantity INTEGER, received INTEGER)")
+conn.execute(
+    "CREATE TABLE orders ("
+    "id INTEGER PRIMARY KEY, supplier TEXT, item TEXT, "
+    "quantity INTEGER, received INTEGER)"
+)
+
+
 order_total = 0
 
 
 def placeOrder(conn, supplier, item, quantity):
     global order_total
     conn.execute(
-        "INSERT INTO orders (supplier, item, quantity, received) VALUES (?, ?, ?, 0)",
+        "INSERT INTO orders (supplier, item, quantity, received) "
+        "VALUES (?, ?, ?, 0)",
         (supplier, item, quantity),
     )
-    order_total+=quantity
+    order_total += quantity
     return order_total
 
 
@@ -29,7 +36,9 @@ def cleanup(conn):
 
 
 def pendingCount(conn):
-    return conn.execute("SELECT COUNT(*) FROM orders WHERE received = 0").fetchone()[0]
+    return conn.execute(
+        "SELECT COUNT(*) FROM orders WHERE received = 0"
+    ).fetchone()[0]
 
 
 def main():
