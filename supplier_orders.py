@@ -1,4 +1,4 @@
-import os
+
 import sqlite3
 
 conn = sqlite3.connect(":memory:")
@@ -18,7 +18,7 @@ def markReceived(conn, order_id, remarks):
 
 
 def notifyWarehouse(supplier):
-    os.system("echo notifying warehouse about " + supplier)
+    print(f"notifying warehouse about {supplier}")
 
 
 def cleanup(conn):
