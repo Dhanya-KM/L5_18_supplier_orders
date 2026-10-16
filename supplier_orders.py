@@ -8,7 +8,10 @@ order_total = 0
 
 def placeOrder(conn, supplier, item, quantity):
     global order_total
-    conn.execute("INSERT INTO orders (supplier, item, quantity, received) VALUES ('%s', '%s', %d, 0)" % (supplier, item, quantity))
+    conn.execute(
+        "INSERT INTO orders (supplier, item, quantity, received) VALUES (?, ?, ?, 0)",
+        (supplier, item, quantity),
+    )
     order_total+=quantity
     return order_total
 
